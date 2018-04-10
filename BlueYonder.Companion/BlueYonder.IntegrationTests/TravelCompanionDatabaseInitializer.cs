@@ -10,8 +10,8 @@ using BlueYonder.Entities.Enums;
 
 namespace BlueYonder.IntegrationTests
 {
-    // TODO: Mod 2: Exercise 1: Task 2b: Examine the content of the FlightScheduleDatabaseInitializer initializer class.
-    // This class derives from the DropCreateDatabaseAlways so the database will be re-created every time we run the test
+    // This class derives from the DropCreateDatabaseAlways so the database will be re-created 
+    // every time we run the test
     // The Seed method contains all the initialization code
     class TravelCompanionDatabaseInitializer : DropCreateDatabaseAlways<TravelCompanionContext>
     {
@@ -155,7 +155,10 @@ namespace BlueYonder.IntegrationTests
             context.Flights.Add(flight3);
             context.Flights.Add(flight4);
 
-            //TODO: Lab 02 Exercise 2, Task 6.1 : Add code to save the new reservations          
+            // Add code to save the new reservations     
+            context.Reservations.Add(reservation1);
+            context.Reservations.Add(reservation2);
+            context.SaveChanges();
         }
     }
 }

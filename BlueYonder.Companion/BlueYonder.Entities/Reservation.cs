@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,12 @@ namespace BlueYonder.Entities
 
         public int DepartFlightScheduleID { get; set; }
 
-        //TODO : Lab 02, Exercise 1 Task 2.2 : Add Foreign Key attributes
-        public Trip DepartureFlight { get; set; }
+        [ForeignKey("DepartFlightScheduleID")]
+        public virtual Trip DepartureFlight { get; set; }
 
-        //TODO : Lab 02, Exercise 1 Task 2.2 : mark property as nullable
-        public int ReturnFlightScheduleID { get; set; }
+        public int? ReturnFlightScheduleID { get; set; }
 
-        //TODO : Lab 02, Exercise 1 Task 2.2 : Add Foreign Key attributes
-        public Trip ReturnFlight { get; set; }
+        [ForeignKey("ReturnFlightScheduleID")]
+        public virtual Trip ReturnFlight { get; set; }
     }
 }

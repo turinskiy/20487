@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace BlueYonder.IntegrationTests
 {
     [TestClass]
-    public class ReservationQueries
+    public class ReservationQueriesTests
     {
         [ClassInitialize]
         public static void TestInitialize(TestContext context)
@@ -38,7 +38,21 @@ namespace BlueYonder.IntegrationTests
         [TestMethod]
         public void GetReservationWithFlightsEagerLoad()
         {
+            Reservation reservation;
+            using (var rep = new ReservationRepository())
+            {
+                var query = from r in rep.GetAll()
+                    where r.ConfirmationCode == "1234"
+                    select r;
 
+                query = query.Include(r => r.DepartureFlight).Include(r => r.ReturnFlight);
+
+                reservation = query.FirstOrDefault();
+            }
+
+            Assert.IsNotNull(reservation);
+            Assert.IsNotNull(reservation.DepartureFlight);
+            Assert.IsNotNull(reservation.ReturnFlight);
         }
 
         [TestMethod]
@@ -55,7 +69,8 @@ namespace BlueYonder.IntegrationTests
                 reservation = query.FirstOrDefault();
 
                 Assert.IsNotNull(reservation);
-                //TODO: Lab 02 Exercise 2, Task 2.2 : Complete the Lazy Load test implementation
+                Assert.IsNotNull(reservation.DepartureFlight);
+                Assert.IsNotNull(reservation.ReturnFlight);
             }
         }
 
@@ -64,7 +79,7 @@ namespace BlueYonder.IntegrationTests
         {
             Reservation reservation;
             TravelCompanionContext context = new TravelCompanionContext();
-            //TODO: Lab 02 Exercise 2, Task 2.3 : Turn Lazy Loading Off
+            context.Configuration.LazyLoadingEnabled = false;
 
             using (var repository = new ReservationRepository(context))
             {
@@ -86,8 +101,10 @@ namespace BlueYonder.IntegrationTests
             List<Reservation> reservations = null;
             using (TravelCompanionContext context = new TravelCompanionContext())
             {
-                //TODO: Lab 02 Exercise 2, Task 3.1 : Create an Entity SQL Query
+                var sqlQuery = @"select value r from reservations as r order by r.confirmationCode DESC";
 
+                var query = ((IObjectContextAdapter) context).ObjectContext.CreateQuery<Reservation>(sqlQuery);
+                reservations = query.ToList();
                 
                 Assert.AreEqual(reservations.Count, 2);
                 Assert.AreEqual(reservations.ElementAt(0).ConfirmationCode, "4321");
@@ -101,9 +118,9 @@ namespace BlueYonder.IntegrationTests
             using (TravelCompanionContext context = new TravelCompanionContext())
             {
                 IEnumerable<Reservation> query = context.Database.SqlQuery<Reservation>(
-@"select r.* from Reservations r
-  inner join Trips t on r.DepartFlightScheduleID = t.TripId
-  where t.Class = 2");
+                    @"select r.* from Reservations r
+                      inner join Trips t on r.DepartFlightScheduleID = t.TripId
+                      where t.Class = 2");
 
                 List<Reservation> flights = query.ToList();
 
