@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="BlueYonder.Entities.Flight">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAGBAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Flight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.FlightSchedule">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAKAAAAgAAAAAAABAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>FlightSchedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.FrequentFlyer">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAEAAAAABAAAAABAAAAAAAAEAAEAAAAAAAAAAAAg=</HashCode>
+      <FileName>FrequentFlyer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.Location">
+    <Position X="7.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAIAAAIAAAAAAAIAAAAAAAAAAIIAAAAAAAAFAAAAAA=</HashCode>
+      <FileName>Location.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.Reservation">
+    <Position X="2.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAgAEBAAAAAIAAAAAAAAAAEAAAAAAAAEgAAAA=</HashCode>
+      <FileName>Reservation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.Traveler">
+    <Position X="4.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAEAAACAAAAAABBAAAAAAAAAAAEAAAAAAAEAAAAg=</HashCode>
+      <FileName>Traveler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueYonder.Entities.Trip">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAKAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

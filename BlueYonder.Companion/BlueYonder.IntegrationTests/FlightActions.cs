@@ -10,8 +10,9 @@ using BlueYonder.DataAccess.Repositories;
 
 namespace BlueYonder.IntegrationTests
 {
-    
-    // The database initializer create test data and clear any existing remains from previous runs, before running the tests
+
+    // The database initializer create test data and clear any existing remains from previous runs, 
+    // before running the tests
     [TestClass]
     public class FlightActions
     {
@@ -99,7 +100,16 @@ namespace BlueYonder.IntegrationTests
             // Update the flight number
             flight.FlightNumber = "BY002_updated";
 
-            //TODO: Lab 02 Exercise 2, Task 4.1 : Implement the UpdateFlight Method                      
+            using (var rep = new FlightRepository())
+            {
+                rep.Edit(flight);
+                rep.Save();
+            }
+            using (var rep = new FlightRepository())
+            {
+                var res = rep.FindBy(item => item.FlightNumber == "BY002_updated").FirstOrDefault();
+                Assert.IsNotNull(res);
+            }
         }
      
         [TestMethod]
@@ -115,17 +125,14 @@ namespace BlueYonder.IntegrationTests
                 // Update flight and location
                 flight = flightRepository.FindBy(f => f.FlightNumber == "BY001").Single();
                 flight.FlightNumber = "BY001_updated";                
-                // Since the flight was retrieved using the current repository, 
-                // we don't need to call the Edit method
                 flightRepository.Save();
 
                 location = locationRepository.FindBy(l => l.City == "Rome").Single();
                 location.City = "Rome_updated";
-                // Since the location was retrieved using the current repository, 
-                // we don't need to call the Edit method
                 locationRepository.Save();
 
-                //TODO: Lab 02, Exercise 2 Task 5.2 : Review the query for the updated flight that is inside the transaction scope               
+                // Review the query for the updated flight that is 
+                // inside the transaction scope               
                 flightFromDb = (from f in flightRepository.GetAll()
                                 where f.Source.City == "Rome_updated"
                                 select f).FirstOrDefault();
@@ -138,7 +145,7 @@ namespace BlueYonder.IntegrationTests
             }
 
 
-            //TODO: Lab 02, Exercise 2 Task 5.4 : Review the query for the updated flight that is outside the transaction scope
+            // Review the query for the updated flight that is outside the transaction scope
             flightFromDb = (from f in flightRepository.GetAll()
                             where f.Source.City == "Rome_updated"
                             select f).FirstOrDefault();
